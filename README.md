@@ -42,3 +42,10 @@ ELK 三个软件的安装都十分简单，下载就可以使用，无需安装�
   "tagline" : "You Know, for Search"
 }
 ```
+
+### 运行
+
+整个框架数据流转的过程大致是这个样子的：
+
+[![9nqI8f.md.gif](https://s1.ax1x.com/2018/02/04/9nqI8f.md.gif)](https://imgchr.com/i/9nqI8f)
+
