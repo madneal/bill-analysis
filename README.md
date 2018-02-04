@@ -14,7 +14,7 @@ ELK 即 elasticsearch, logstash 以及 kibana。Elasticsearch 是一个基于 lu
 
 ## 安装
 
-ELK 三个软件的安装都十分简单，下载就可以使用，无需安装。可以去 https://www.elastic.co/cn/downloads 下载页面选择合适的工具进行下载。三个工具的使用都十分简单，一般只需要运行 `bin` 文件下的 bat 文件就可以了。
+ELK 三个软件的安装都十分简单，下载就可以使用，无需安装。可以去 https://www.elastic.co/cn/downloads 下载页面选择合适的工具进行下载。三个工具的使用都十分简单，一般只需要运行 `bin` 文件下的 bat 文件就可以了。我下载的都是最新版本的，即 6.1.2 版本。
 
 ### elasticsearch
  
@@ -22,4 +22,20 @@ ELK 三个软件的安装都十分简单，下载就可以使用，无需安装�
  
 验证 ES 运行成功，可以使用 `curl` 命令，`curl http://loclahost:9200` 或者直接使用浏览器访问 `localhost:9200`
 
+```
+{
+  "name" : "ZWtApuh",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "DyfiD0NlSkuDdE5m-NBRAg",
+  "version" : {
+    "number" : "6.1.2",
+    "build_hash" : "5b1fea5",
+    "build_date" : "2018-01-10T02:35:59.208Z",
+    "build_snapshot" : false,
+    "lucene_version" : "7.1.0",
+    "minimum_wire_compatibility_version" : "5.6.0",
+    "minimum_index_compatibility_version" : "5.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
 ```
