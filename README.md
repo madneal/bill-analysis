@@ -51,4 +51,39 @@ ELK 三个软件的安装都十分简单，下载就可以使用，无需安装�
 
 首先从支付包官网下载数据，可以选择 excel 格式进行下载，为了方便数据的处理，最好删除掉表头和表尾的数据，只保留数据，这也是为了方便后面的 logstash 的处理。接着使用 logstash 的处理，logstash 相当于是一个数据中转站，从 csv 文件中获取数据，然后对获取的数据在进行处理，在将数据输出到 elasticsearch 中。Elasticsearch 对于数据进行索引，最后 kibana 作为展示工具可以对 ES 索引的数据进行展示。
 
+从支付宝官网下载数据后，应该删除掉表头和表尾数据，只保留我们需要的数据信息。接着使用 logstash 来处理数据，包括 input, filter, output 三个方面的配置。首先是 input:
+```
+input {
+  file {
+    type => "zhifubao"
+    path => ["C:/Users/neal1/project/bill-analysis/data/*.csv"]
+    start_position => "beginning"
+    codec => plain {
+      charset => "GBK"
+    }
+  }
+}
+```
+
+可以通过 type 来设置来区分数据的不同类型，注意一点的是需要设置 charset 来处理编码问题，否则可能会导致乱码问题。另外对于 ES 的配置，也要设置 ES 安装程序 config 文件夹中的 jvm.options 文件,将 `-Dfile.encoding=UTF8` 改为 `-Dfile.encoding=GBK`，否则 logstash 向 ES 中写入数据也会产生报错。
+
+```
+filter {
+  if [type] == "zhifubao" {
+    csv {
+      separator => ","
+      columns => ["TransId", "OrderId", "TransCreateTime", "Paytime", "LastModified", "TransSource", "Type", "Counterparty", "ProductName", "Amount", "inOut",
+                  "status", "serviceCost", "IssuccessRefund", "Remark", "FundStatus"]
+      convert => {
+        "Amount" => "float"
+      }
+    } 
+    date {
+        match => ["TransCreateTime", "dd/MMM/yyyy HH:mm:ss", "yyyy/MM/dd HH:mm"]
+    }
+  }
+}
+```
+
+接着是使用 filter 插件对数据进行过滤
 
