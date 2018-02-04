@@ -49,4 +49,6 @@ ELK 三个软件的安装都十分简单，下载就可以使用，无需安装�
 
 ![elk](https://user-images.githubusercontent.com/12164075/35777214-0596c156-09e5-11e8-924a-e0d614d007a8.gif)
 
+首先从支付包官网下载数据，可以选择 excel 格式进行下载，为了方便数据的处理，最好删除掉表头和表尾的数据，只保留数据，这也是为了方便后面的 logstash 的处理。接着使用 logstash 的处理，logstash 相当于是一个数据中转站，从 csv 文件中获取数据，然后对获取的数据在进行处理，在将数据输出到 elasticsearch 中。Elasticsearch 对于数据进行索引，最后 kibana 作为展示工具可以对 ES 索引的数据进行展示。
+
 
