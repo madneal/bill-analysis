@@ -87,3 +87,36 @@ filter {
 
 接着是使用 filter 插件对数据进行过滤
 
+```
+filter {
+  if [type] == "zhifubao" {
+    csv {
+      separator => ","
+      columns => ["TransId", "OrderId", "TransCreateTime", "Paytime", "LastModified", "TransSource", "Type", "Counterparty", "ProductName", "Amount", "inOut",
+                  "status", "serviceCost", "IssuccessRefund", "Remark", "FundStatus"]
+    } 
+    date {
+      match => ["TransCreateTime", "MMM dd yyyy HH:mm:ss"]
+    }
+  }
+}
+```
+
+需要对于 csv 文件进行转化，设置对应的列名。还有一点就是要使用 date 插件来修改 timestamp，否则索引的默认 timestamp 是 logstash 向 ES 中写入数据的时间。通过 date 插件可以将交易事件转化为默认的 timestamp 来使用。
+
+最后输出到 ES 中
+
+```
+output {
+  if [type] == "zhifubao" {
+    elasticsearch {
+        hosts => [ "localhost:9200" ]
+        index => logstash
+    }
+  }
+}
+```
+
+hosts 可以支持添加多个 ES 实例，并且设置索引名，这里最好设置一下，否则可能会导致索引名映射错误。这样，就完成了 logstash 的配置文件 [logstash.conf](https://github.com/neal1991/bill-analysis/blob/master/logstash.conf)。Logstash 的运行命令为 `logstash.bat -f logstash.conf` 来运行。
+
+
