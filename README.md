@@ -128,4 +128,14 @@ hosts 可以支持添加多个 ES 实例，并且设置索引名，这里最好�
 
 [![9Migl4.md.png](https://s1.ax1x.com/2018/02/05/9Migl4.md.png)](https://imgchr.com/i/9Migl4)
 
+索引创建成功之后，你就可以进行查询了。对于 kibana 的查询我就不一一赘述，可以参考[query dsl](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/query-dsl.html)。这里，我主要讲一下数据的可视化。最后创建的一个 dashboard 大致是这个样子的：
 
+[![9MiotK.md.png](https://s1.ax1x.com/2018/02/05/9MiotK.md.png)](https://imgchr.com/i/9MiotK)
+
+主要包括：当前的累计收入，累计支出，支出收入比，每礼拜最高支出，支出变化，Visualize 的类型主要包括 Metric, Line, Pie, Vertical bar 类型。选一个例子来讲，假设我们要创建一个每个礼拜最高支出的柱状图。
+
+![gickr com _583f7777-c0a9-2934-1569-578643ec11d1](https://user-images.githubusercontent.com/12164075/35807469-da1bc826-0abd-11e8-9f6a-7b078fcf8c8f.gif)
+
+## 总结
+
+以上我就是利用 ELK 对于支付宝账单的一个可视化分析。ELK 对于大数据的分析可以说是如鱼得水，此次的实验也仅仅是一个简单的尝试，如果大家有更有意思的想法，可以和我交流。
